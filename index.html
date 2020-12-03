@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+
+<body>
+    <form>
+        <p>text <input type="text" name="text" id="inputText" /></p>
+        <p>result <input type="text" name="result" id="bypassResult" /></p>
+        <p><input type="submit" value="submit" /></p>
+    </form>
+    <script>
+        var replaceDict = {
+            'K':'\u041A',
+            'o':'\u043E',
+            'e':'\u0435',
+            'l':'I',
+        }
+        $('form').submit(function () {
+            var inputText = $('#inputText').val()
+            for (var replaceChar in replaceDict) {
+                inputText = inputText.replaceAll(replaceChar, replaceDict[replaceChar]);
+            }
+            var bypassResult = '';
+            for (var i=0; i<inputText.length; i++) {
+                bypassResult = bypassResult + inputText.charAt(i);
+                var spaceNum = Math.floor(Math.random() * 3);
+                for (var j=0;j<spaceNum;j++) {
+                    bypassResult = bypassResult + '\u2063';
+                }
+            }
+            $('#bypassResult').val(bypassResult);
+            return false;
+        });
+    </script>
+</body>
+
+</html>
